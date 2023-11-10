@@ -1,3 +1,60 @@
+CREATE TABLE employees (
+    employee_id INTEGER PRIMARY KEY,
+    department TEXT,
+    salary DECIMAL(10, 2),
+    years_of_experience INTEGER
+);
+
+INSERT INTO employees (employee_id, department, salary, years_of_experience)
+VALUES
+    (1, 'Finance', 60000.00, 5),
+    (2, 'Marketing', 55000.00, 3),
+    (3, 'Sales', 75000.00, 8),
+    (4, 'Engineering', 80000.00, 7),
+    (5, 'HR', 50000.00, 2),
+    (6, 'Finance', 70000.00, 6),
+    (7, 'Marketing', 60000.00, 4),
+    (8, 'Sales', 85000.00, 10),
+    (9, 'Engineering', 90000.00, 9),
+    (10, 'HR', 55000.00, 3),
+    (11, 'Sales', 72000.00, 6),
+    (12, 'Sales', 80000.00, 7),
+    (13, 'Engineering', 85000.00, 8),
+    (14, 'Engineering', 92000.00, 10);CREATE TABLE products (
+    product_id INTEGER PRIMARY KEY,
+    product_name TEXT,
+    product_type TEXT,
+    speed_mbps INTEGER,
+    data_limit_gb INTEGER,
+    monthly_price DECIMAL(8, 2)
+);
+
+INSERT INTO products (product_id, product_name, product_type, speed_mbps, data_limit_gb, monthly_price)
+VALUES
+    (1, 'High-Speed Internet', 'Internet', 100, 500, 49.99),
+    (2, 'Unlimited Data Plan', 'Cell Phone Service', NULL, NULL, 35.00),
+    (3, 'Premium TV Package', 'TV Package', NULL, NULL, 79.99),
+    (4, 'Fiber Optic Internet', 'Internet', 500, 1000, 79.99),
+    (5, 'Family Plan', 'Cell Phone Service', NULL, NULL, 25.00);
+    
+CREATE TABLE customer_subscriptions (
+customer_id TEXT PRIMARY KEY,
+product_id INTEGER,
+price DECIMAL(8, 2),
+email TEXT,
+FOREIGN KEY (product_id) REFERENCES products (product_id)
+);
+
+INSERT INTO customer_subscriptions (customer_id, product_id, price, email)
+VALUES
+    ('123456789012', 1, 49.99, 'john.doe@example.com'),
+    ('234567890123', 2, 35.00, 'jane.smith@example.com'),
+    ('345678901234', 3, 79.99, 'alice.davis@example.com'),
+    ('456789012345', 4, 79.99, 'bob.johnson@example.com'),
+    ('567890123456', 1, 49.99, 'susan.wilson@example.com');
+
+
+
 #write SQL that will select the product names of all the Internet products types.
 SELECT product_name
 FROM products
