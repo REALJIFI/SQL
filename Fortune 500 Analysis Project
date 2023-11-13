@@ -56,13 +56,13 @@ VALUES
     ('Company JJ', 'Manufacturing', 370.0, 3100, 1, 20, 12, 7.6),
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
 
-#write a SQL that shows the revenue payment made by technology companies 
+#write a SQL that shows the revenue generated from technology companies 
 
 SELECT company_name, revenue,industry
 FROM fortune_companies
 WHERE industry="Technology";
 
-#Group the data in a new way using a CASE statement.
+#write a SQL stating the expected time the healthcare industry maternity leave should elapse using CASE statement.
 
 SELECT company_name, industry,
 CASE 
@@ -72,3 +72,51 @@ ELSE "over_stay"
 END AS standard_procedure
 FROM fortune_companies
 WHERE industry="Healthcare";
+
+#write a SQL 
+
+SELECT industry, company_name, SUM(employees) as employees_salary
+FROM fortune_companies
+GROUP BY industry
+HAVING employees_salary>=1400;
+
+#write a SQL
+
+SELECT industry, company_name, AVG(revenue) as paid_revenue
+FROM fortune_companies
+GROUP BY industry
+HAVING paid_revenue >= 150;
+
+#write a SQL command ROUNDING up the numbers 
+
+SELECT industry, company_name, ROUND(revenue,2) as paid_revenue
+FROM fortune_companies
+GROUP BY industry
+HAVING paid_revenue >= 150;
+
+#write a SQL
+
+SELECT company_name, industry,healthcare_benefits, 
+paid_time_off_days,avg_employee_tenure
+FROM fortune_companies
+WHERE paid_time_off_days <=20
+AND avg_employee_tenure >=4.5
+AND healthcare_benefits >=1
+ORDER BY paid_time_off_days;
+
+#write a SQL 
+
+SELECT COUNT(industry), company_id
+FROM fortune_companies
+WHERE employees>=3000;
+
+#write a SQL
+
+SELECT MAX(employees) as highest_paid_salary, company_name
+FROM fortune_companies
+WHERE industry="Telecommunications";
+
+SELECT MIN(employees) as least_paid_salary, company_name
+FROM fortune_companies
+WHERE industry="Energy";
+
