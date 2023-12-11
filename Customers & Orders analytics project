@@ -60,3 +60,10 @@ JOIN "customers" as cust
 ON Febs.orderid=cust.order_id
 WHERE Febs.Quantity>2
 AND Length(orderid)=6;
+
+#List all the products sold in Los Angeles in February, and include how many of each were sold.
+SELECT Product
+,SUM(Quantity)
+FROM "Febsales"
+WHERE  location like '%Los Angeles%'
+GROUP BY Product;
