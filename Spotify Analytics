@@ -1,0 +1,51 @@
+# For this project, I downloaded Spotify data from Kaggle.
+# Then I created a table where i inserted Spotify data 
+# Finally, I performed analytics on the data using SQL. 
+
+#Creating the table: 
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness text NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL 
+)
+
+#Then I inserted the Spotify Data .csv into the table.
+
+#Next, I explored the data using the following SQL. 
+
+#who are the top 15 artist with the loudest song
+SELECT artist_name, loudness, track_name
+FROM BIT_DB.Spotifydata
+GROUP BY loudness
+ORDER BY loudness ASC
+LIMIT 15;
+
+#What artist released the longest song?
+SELECT artist_name, track_name
+, MAX(duration_ms) as time
+FROM BIT_DB.Spotifydata;
+
+#what is the track and name of the best 20 artist with highest live perfomance,danceability,and stage perfomance energy.
+SELECT artist_name, track_name
+,MAX(liveness) AS live
+,MAX(danceability) AS showoff 
+,MAX(energy) AS ginger
+FROM BIT_DB.spotifydata
+GROUP BY artist_name, track_name
+ORDER BY live DESC
+LIMIT 20;
